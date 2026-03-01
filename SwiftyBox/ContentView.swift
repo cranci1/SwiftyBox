@@ -61,6 +61,21 @@ struct ContentView: View {
     @State private var uploadProgress = 0.0
     @State private var uploadedURL = ""
     @State private var errorMessage = ""
+
+    init() {
+        let defaults = UserDefaults.standard
+        if let raw = defaults.string(forKey: "litterboxDuration"),
+           let dur = LitterboxDuration(rawValue: raw) {
+            _selectedDuration = State(initialValue: dur)
+        }
+        let length = defaults.integer(forKey: "litterboxFileNameLength")
+        if length != 0 {
+            _litterboxFileNameLength = State(initialValue: length)
+        }
+        if let hash = defaults.string(forKey: "userHash") {
+            _userHash = State(initialValue: hash)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -112,6 +127,15 @@ struct ContentView: View {
             Task {
                 await loadSelectedPhoto(from: newItem)
             }
+        }
+        .onChange(of: selectedDuration) { newValue in
+            UserDefaults.standard.set(newValue.rawValue, forKey: "litterboxDuration")
+        }
+        .onChange(of: litterboxFileNameLength) { newValue in
+            UserDefaults.standard.set(newValue, forKey: "litterboxFileNameLength")
+        }
+        .onChange(of: userHash) { newValue in
+            UserDefaults.standard.set(newValue, forKey: "userHash")
         }
     }
     
@@ -389,8 +413,11 @@ struct ContentView: View {
     
     private func uploadWithProgress(request: URLRequest, body: Data) async throws -> (Data, URLResponse) {
         try await withCheckedThrowingContinuation { continuation in
+            var observation: NSKeyValueObservation?
+            
             let task = URLSession.shared.uploadTask(with: request, from: body) { data, response, error in
-                observation.invalidate()
+                observation?.invalidate()
+                observation = nil
                 
                 if let error {
                     continuation.resume(throwing: error)
@@ -405,7 +432,7 @@ struct ContentView: View {
                 continuation.resume(returning: (data, response))
             }
             
-            let observation = task.progress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
+            observation = task.progress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
                 let fraction = progress.fractionCompleted
                 Task { @MainActor in
                     uploadProgress = min(max(fraction, 0), 1)
