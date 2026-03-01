@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "$0")"
 
 WORKING_LOCATION="$(pwd)"
-APPLICATION_NAME=SwifyBox
+APPLICATION_NAME=SwiftyBox
 
 if [ ! -d "build" ]; then
     mkdir build
@@ -35,8 +35,8 @@ fi
 
 
 mkdir Payload
-cp -r SwifyBox.app Payload/SwifyBox.app
-strip Payload/SwifyBox.app/SwifyBox
-zip -vr SwifyBox.ipa Payload
-rm -rf SwifyBox.app
+cp -r SwiftyBox.app Payload/SwiftyBox.app
+strip Payload/SwiftyBox.app/SwiftyBox
+zip -vr SwiftyBox.ipa Payload
+rm -rf SwiftyBox.app
 rm -rf Payload
