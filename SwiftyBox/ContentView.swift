@@ -80,17 +80,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
-                    headerSection
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .glassEffect()
-                } else {
-                    headerSection
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(.ultraThinMaterial)
-                }
+                headerSection
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.ultraThinMaterial)
                 
                 Form {
                     Section(header: Text("Destination")) { destinationSection }
@@ -315,6 +308,7 @@ struct ContentView: View {
         .disabled(isUploadDisabled)
         .opacity(isUploadDisabled ? 0.6 : 1)
         .allowsHitTesting(!isUploadDisabled)
+        .modifier(LiquidGlassModifier())
     }
     
     @ViewBuilder
@@ -487,5 +481,15 @@ struct ContentView: View {
         let values = try? fileURL.resourceValues(forKeys: [.fileSizeKey])
         let fileSize = values?.fileSize ?? 0
         return byteCountLabel(for: fileSize)
+    }
+}
+
+struct LiquidGlassModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
+            content.glassEffect()
+        } else {
+            content
+        }
     }
 }
