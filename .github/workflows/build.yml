@@ -1,0 +1,29 @@
+name: Build iPA
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-ios:
+    name: Build iOS IPA
+    runs-on: macos-26
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+          
+      - name: Make build script executable
+        run: chmod +x ./ipabuild.sh
+        
+      - name: Build iOS IPA
+        run: ./ipabuild.sh
+        
+      - name: Upload iOS IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SwiftyBox
+          path: build/SwiftyBox.ipa
