@@ -61,7 +61,7 @@ struct ContentView: View {
     @State private var uploadProgress = 0.0
     @State private var uploadedURL = ""
     @State private var errorMessage = ""
-
+    
     init() {
         let defaults = UserDefaults.standard
         if let raw = defaults.string(forKey: "litterboxDuration"),
@@ -89,7 +89,10 @@ struct ContentView: View {
                     Section(header: Text("Destination")) { destinationSection }
                     Section(header: Text("Options"))     { optionsSection }
                     Section(header: Text("Source"))      { fileSection }
-                    Section { uploadButton }
+                    Section {
+                        uploadButton
+                    }
+                    .listRowBackground(Color.accentColor.opacity(0.1))
                     
                     if isUploading { Section { uploadProgressSection } }
                     if !uploadedURL.isEmpty {
@@ -108,7 +111,7 @@ struct ContentView: View {
         }
         .fileImporter(
             isPresented: $isFileImporterPresented,
-            allowedContentTypes: [.item],
+            allowedContentTypes: [.data],
             allowsMultipleSelection: false
         ) { result in
             switch result {
@@ -258,12 +261,13 @@ struct ContentView: View {
     
     private var fileSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 5) {
+            HStack {
                 Button {
                     isFileImporterPresented = true
                 } label: {
                     Label("Choose File", systemImage: "doc")
                 }
+                
                 Spacer()
                 
                 PhotosPicker(selection: $selectedPhotoItem, matching: .any(of: [.images, .videos]), photoLibrary: .shared()) {
@@ -298,11 +302,15 @@ struct ContentView: View {
                 await uploadSelectedFile()
             }
         } label: {
-            Label(isUploading ? "Uploading…" : "Upload", systemImage: isUploading ? "arrow.triangle.2.circlepath" : "icloud.and.arrow.up.fill")
-                .frame(maxWidth: .infinity)
+            HStack {
+                Spacer()
+                Image(systemName: isUploading ? "arrow.triangle.2.circlepath" : "icloud.and.arrow.up.fill")
+                Text(isUploading ? "Uploading…" : "Upload")
+                Spacer()
+            }
+            .padding()
+            .foregroundColor(.white)
         }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
         .disabled(isUploadDisabled)
         .opacity(isUploadDisabled ? 0.6 : 1)
         .allowsHitTesting(!isUploadDisabled)
