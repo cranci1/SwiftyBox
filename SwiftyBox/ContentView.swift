@@ -79,11 +79,18 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                headerSection
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(.ultraThinMaterial)
+            VStack(alignment: .leading) {
+                if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
+                    headerSection
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .glassEffect()
+                } else {
+                    headerSection
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(.ultraThinMaterial)
+                }
                 
                 Form {
                     Section(header: Text("Destination")) { destinationSection }
@@ -92,7 +99,7 @@ struct ContentView: View {
                     Section {
                         uploadButton
                     }
-                    .listRowBackground(Color.accentColor.opacity(0.1))
+                    .listRowBackground(Color.accentColor.opacity(0.3))
                     
                     if isUploading { Section { uploadProgressSection } }
                     if !uploadedURL.isEmpty {
@@ -223,7 +230,6 @@ struct ContentView: View {
             }
             .pickerStyle(.segmented)
         }
-        .padding(.vertical, 4)
     }
     
     @ViewBuilder
@@ -233,9 +239,8 @@ struct ContentView: View {
                 TextField("Optional userhash", text: $userHash)
                     .textFieldStyle(.roundedBorder)
             }
-            .padding(.vertical, 4)
         } else {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading) {
                 Picker("Duration", selection: $selectedDuration) {
                     ForEach(LitterboxDuration.allCases) { duration in
                         Text(duration.label).tag(duration)
@@ -244,8 +249,7 @@ struct ContentView: View {
                 .pickerStyle(.menu)
                 
                 HStack {
-                    Text("Filename length")
-                        .foregroundStyle(.secondary)
+                    Text("Name length")
                     Spacer()
                     Picker("Filename length", selection: $litterboxFileNameLength) {
                         Text("6 characters").tag(6)
@@ -255,7 +259,6 @@ struct ContentView: View {
                     .frame(width: 220)
                 }
             }
-            .padding(.vertical, 4)
         }
     }
     
@@ -302,14 +305,12 @@ struct ContentView: View {
                 await uploadSelectedFile()
             }
         } label: {
-            HStack {
-                Spacer()
+            HStack(alignment: .center) {
                 Image(systemName: isUploading ? "arrow.triangle.2.circlepath" : "icloud.and.arrow.up.fill")
                 Text(isUploading ? "Uploading…" : "Upload")
-                Spacer()
             }
-            .padding()
             .foregroundColor(.white)
+            .frame(maxWidth: .infinity, alignment: .center)
         }
         .disabled(isUploadDisabled)
         .opacity(isUploadDisabled ? 0.6 : 1)
