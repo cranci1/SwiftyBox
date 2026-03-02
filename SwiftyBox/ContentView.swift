@@ -90,7 +90,12 @@ struct ContentView: View {
                     Section(header: Text("Options"))     { optionsSection }
                     Section(header: Text("Source"))      { fileSection }
                     Section {
-                        uploadButton
+                        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
+                            uploadButton
+                                .glassEffect()
+                        } else {
+                            uploadButton
+                        }
                     }
                     .listRowBackground(Color.accentColor.opacity(0.3))
                     
@@ -308,7 +313,6 @@ struct ContentView: View {
         .disabled(isUploadDisabled)
         .opacity(isUploadDisabled ? 0.6 : 1)
         .allowsHitTesting(!isUploadDisabled)
-        .modifier(LiquidGlassModifier())
     }
     
     @ViewBuilder
@@ -481,15 +485,5 @@ struct ContentView: View {
         let values = try? fileURL.resourceValues(forKeys: [.fileSizeKey])
         let fileSize = values?.fileSize ?? 0
         return byteCountLabel(for: fileSize)
-    }
-}
-
-struct LiquidGlassModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
-            content.glassEffect()
-        } else {
-            content
-        }
     }
 }
