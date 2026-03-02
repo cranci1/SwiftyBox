@@ -89,15 +89,13 @@ struct ContentView: View {
                     Section(header: Text("Destination")) { destinationSection }
                     Section(header: Text("Options"))     { optionsSection }
                     Section(header: Text("Source"))      { fileSection }
-                    Section {
-                        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
-                            uploadButton
-                                .glassEffect()
-                        } else {
-                            uploadButton
-                        }
+                        
+                    if #available(iOS 26.0, macOS 26.0, tvOS 26.0, *) {
+                        uploadButton
+                            .glassEffect()
+                    } else {
+                        uploadButton
                     }
-                    .listRowBackground(Color.accentColor.opacity(0.3))
                     
                     if isUploading { Section { uploadProgressSection } }
                     if !uploadedURL.isEmpty {
@@ -308,8 +306,8 @@ struct ContentView: View {
                 Text(isUploading ? "Uploading…" : "Upload")
             }
             .foregroundColor(.white)
-            .frame(maxWidth: .infinity, alignment: .center)
         }
+        .padding()
         .disabled(isUploadDisabled)
         .opacity(isUploadDisabled ? 0.6 : 1)
         .allowsHitTesting(!isUploadDisabled)
