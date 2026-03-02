@@ -11,6 +11,9 @@
 		132B8AEA2F5498AE00CD3723 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AE92F5498AE00CD3723 /* ContentView.swift */; };
 		132B8AEC2F5498B200CD3723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 132B8AEB2F5498B200CD3723 /* Assets.xcassets */; };
 		132B8AEF2F5498B200CD3723 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 132B8AEE2F5498B200CD3723 /* Preview Assets.xcassets */; };
+		132B8AFB2F55D65700CD3723 /* UploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AF62F55D65600CD3723 /* UploadModels.swift */; };
+		132B8AFC2F55D65700CD3723 /* CatboxUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AF82F55D65600CD3723 /* CatboxUploadService.swift */; };
+		132B8AFD2F55D65700CD3723 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AFA2F55D65600CD3723 /* UploadViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		132B8AE92F5498AE00CD3723 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		132B8AEB2F5498B200CD3723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		132B8AEE2F5498B200CD3723 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		132B8AF62F55D65600CD3723 /* UploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadModels.swift; sourceTree = "<group>"; };
+		132B8AF82F55D65600CD3723 /* CatboxUploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatboxUploadService.swift; sourceTree = "<group>"; };
+		132B8AFA2F55D65600CD3723 /* UploadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,9 @@
 		132B8AE62F5498AE00CD3723 /* SwiftyBox */ = {
 			isa = PBXGroup;
 			children = (
+				132B8AF52F55D65600CD3723 /* Models */,
+				132B8AF72F55D65600CD3723 /* Services */,
+				132B8AF92F55D65600CD3723 /* ViewModels */,
 				132B8AE72F5498AE00CD3723 /* SwiftyBoxApp.swift */,
 				132B8AE92F5498AE00CD3723 /* ContentView.swift */,
 				132B8AEB2F5498B200CD3723 /* Assets.xcassets */,
@@ -65,6 +74,30 @@
 				132B8AEE2F5498B200CD3723 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		132B8AF52F55D65600CD3723 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				132B8AF62F55D65600CD3723 /* UploadModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		132B8AF72F55D65600CD3723 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				132B8AF82F55D65600CD3723 /* CatboxUploadService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		132B8AF92F55D65600CD3723 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				132B8AFA2F55D65600CD3723 /* UploadViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132B8AFD2F55D65700CD3723 /* UploadViewModel.swift in Sources */,
+				132B8AFC2F55D65700CD3723 /* CatboxUploadService.swift in Sources */,
+				132B8AFB2F55D65700CD3723 /* UploadModels.swift in Sources */,
 				132B8AEA2F5498AE00CD3723 /* ContentView.swift in Sources */,
 				132B8AE82F5498AE00CD3723 /* SwiftyBoxApp.swift in Sources */,
 			);
