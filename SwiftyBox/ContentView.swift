@@ -5,13 +5,15 @@
 //  Created by Francesco on 01/03/26.
 //
 
+import Drops
 import SwiftUI
 import PhotosUI
 
 struct ContentView: View {
     @StateObject private var viewModel = UploadViewModel()
-    @State private var isFileImporterPresented = false
     @State private var selectedPhotoItem: PhotosPickerItem?
+    
+    @State private var isFileImporterPresented = false
     
     var body: some View {
         NavigationStack {
@@ -85,11 +87,17 @@ struct ContentView: View {
                 }
                 
                 if !viewModel.uploadedURL.isEmpty {
-                    Section("Uploaded URL") {
+                    Section(header: Text("Uploaded URL"), footer: Text("Hold to copy the link!")) {
                         if let url = URL(string: viewModel.uploadedURL) {
                             Link(viewModel.uploadedURL, destination: url)
+                                .onLongPressGesture {
+                                    copyUploadedURL()
+                                }
                         } else {
                             Text(viewModel.uploadedURL)
+                                .onLongPressGesture {
+                                    copyUploadedURL()
+                                }
                         }
                     }
                 }
@@ -160,5 +168,17 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    private func copyUploadedURL() {
+        UIPasteboard.general.string = viewModel.uploadedURL
+        Drops.show(
+            Drop(
+                title: "Copied",
+                subtitle: "to clipboard",
+                icon: UIImage(systemName: "checkmark.circle.fill"),
+                duration: .seconds(1.75)
+            )
+        )
     }
 }

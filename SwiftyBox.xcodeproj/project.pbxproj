@@ -14,6 +14,7 @@
 		132B8AFB2F55D65700CD3723 /* UploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AF62F55D65600CD3723 /* UploadModels.swift */; };
 		132B8AFC2F55D65700CD3723 /* CatboxUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AF82F55D65600CD3723 /* CatboxUploadService.swift */; };
 		132B8AFD2F55D65700CD3723 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B8AFA2F55D65600CD3723 /* UploadViewModel.swift */; };
+		1354522B2F5F0CE000FA6E32 /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = 1354522A2F5F0CE000FA6E32 /* Drops */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1354522B2F5F0CE000FA6E32 /* Drops in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +118,9 @@
 			dependencies = (
 			);
 			name = SwiftyBox;
+			packageProductDependencies = (
+				1354522A2F5F0CE000FA6E32 /* Drops */,
+			);
 			productName = SwiftyBox;
 			productReference = 132B8AE42F5498AE00CD3723 /* SwiftyBox.app */;
 			productType = "com.apple.product-type.application";
@@ -144,6 +149,9 @@
 				Base,
 			);
 			mainGroup = 132B8ADB2F5498AE00CD3723;
+			packageReferences = (
+				135452292F5F0CE000FA6E32 /* XCRemoteSwiftPackageReference "Drops" */,
+			);
 			productRefGroup = 132B8AE52F5498AE00CD3723 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -382,6 +390,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		135452292F5F0CE000FA6E32 /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1354522A2F5F0CE000FA6E32 /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 135452292F5F0CE000FA6E32 /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 132B8ADC2F5498AE00CD3723 /* Project object */;
 }

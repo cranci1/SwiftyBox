@@ -35,11 +35,7 @@ final class CatboxUploadService {
         return resultText
     }
     
-    private func uploadWithProgress(
-        request: URLRequest,
-        body: Data,
-        onProgress: @escaping @MainActor (Double) -> Void
-    ) async throws -> (Data, URLResponse) {
+    private func uploadWithProgress(request: URLRequest, body: Data, onProgress: @escaping @MainActor (Double) -> Void) async throws -> (Data, URLResponse) {
         try await withCheckedThrowingContinuation { continuation in
             var observation: NSKeyValueObservation?
             

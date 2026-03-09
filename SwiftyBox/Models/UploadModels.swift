@@ -21,6 +21,15 @@ enum UploadTarget: String, CaseIterable, Identifiable {
             return URL(string: "https://litterbox.catbox.moe/resources/internals/api.php")!
         }
     }
+
+    var maxUploadSizeBytes: Int {
+        switch self {
+        case .catbox:
+            return 200 * 1_000_000
+        case .litterbox:
+            return 1_000_000_000
+        }
+    }
 }
 
 enum LitterboxDuration: String, CaseIterable, Identifiable {
