@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/cranci1/SwiftyBox/refs/heads/main/SwiftyBox/Assets.xcassets/AppIcon.appiconset/appIcon.png" alt="SwiftyBox icon" width="128" height="128">
+<img src="https://raw.githubusercontent.com/cranci1/SwiftyBox/refs/heads/main/SwiftyBox/Assets.xcassets/AppIcon.appiconset/darkmode.png" alt="SwiftyBox icon" width="128" height="128">
 
 **An unofficial catbox.moe iOS client.**
 
